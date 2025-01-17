@@ -6,6 +6,7 @@ function App() {
   const[data, setData] = useState();
   const[haku, setHaku] = useState('');
   const[hakuTemp, setHakuTemp] = useState('');
+
   useEffect(() => {
   if (haku.length === 0){ return;}
     axios.get(`http://localhost:4000/wiki?haku=${haku}`)
@@ -16,6 +17,7 @@ function App() {
       console.log(error);
     });
   }, [haku]);
+
     return (
     <div className="App">
       <input 
@@ -24,6 +26,7 @@ function App() {
       onChange={(event) => setHakuTemp(event.target.value)}
       />
       <button onClick={() => setHaku(hakuTemp)}>Hae</button>
+      
       {data?.[0]?.title && <h1>{data[0].title}</h1>}
       {data?.[0]?.thumbnail && (
       <img src={data[0].thumbnail.source} 
